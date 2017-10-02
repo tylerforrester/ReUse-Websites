@@ -1,0 +1,49 @@
+
+/*this puts it in the top and center of the page*/
+.center {
+	position: absolute;
+	margin: auto;
+	top: 1em;
+	right: 0;
+	left: 0;
+}
+
+/*this is the main one that you click to pop the others out*/
+.menu {
+	width: 44px;
+	height: 44px;
+}
+
+
+.item {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 44px;
+  height: 44px;
+  background-color: white;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  cursor: pointer;
+  text-align: center;
+  line-height: 44px;
+  text-align: center;
+  align-content: center;
+  align-items: vertical;
+  align-items: horizontal;
+  vertical-align: middle;
+  z-index: 99;
+}
+
+i {
+  font-size: 40px;
+  color: #222222;
+  text-align: center;
+}
+
+div{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}

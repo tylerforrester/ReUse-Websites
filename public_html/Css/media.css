@@ -1,0 +1,15 @@
+@media screen and (max-width: 700px){
+	.btn-lg {
+   		 margin-bottom: 1%;
+   		 margin-top: 1%;
+    	font-size: .7em;
+	}
+
+	.navbar img {
+		width: 10%;
+	}
+
+}
+
+
+}

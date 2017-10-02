@@ -1,0 +1,211 @@
+
+/*This is the grid component css. It will automatically be imported when
+you use the grid component by using a php include statement.
+To edit the css used here for one page without affecting other pages,
+copy/paste that into the css file for the page you want to change and
+use the tag !important.
+
+/
+* stopped using these/
+/*@import url("http://fonts.googleapis.com/css?family=Lato:300,400,700");*/
+
+/*The icons that go above the grid for toggling from list to grid*/
+/*@import url("http://weloveiconfonts.com/api/?family=entypo");*/
+
+/*[class*="entypo-"]:before {
+	font-family: 'entypo', sans-serif;
+}*/
+
+body {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 10px;
+	font-family: 'Lato', sans-serif;
+	text-shadow: 0 0 1px rgba(255, 255, 255, 0.004);
+	font-size: 100%;
+	font-weight: 400;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.toggler {
+	color: #000;
+	font-size: 1.25em;
+	margin-left: 8px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.toggler.active {
+	color: #FFF;
+}
+
+.list-elements {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.white-square {
+	display: block;
+	margin-top: 10px;
+	padding: 20px;
+	border-radius: 2px;
+	background: white;
+	box-shadow: 0 2px 1px rgba(170, 170, 170, 0.25);
+}
+
+.box-name {
+	font-weight: 400;
+}
+
+.list .white-square {
+	position: relative;
+	padding: 0;
+	font-size: 14px;
+	line-height: 40px;
+}
+
+.list .white-square .pull-right {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+@media screen and (max-width: 600px) {
+	.list .white-square .pull-right {
+		position: static;
+		line-height: 20px;
+		padding-bottom: 10px;
+	}
+}
+
+.list .box-detail,
+.list .below-line-container
+ {
+	color: #A1A1A4;
+}
+
+.list .box-detail,
+.list .box-name {
+	margin: 0 10px;
+}
+
+.list .box-detail {
+	margin-right: 0;
+}
+
+.list .box-detail,
+.list .box-name {
+	vertical-align: middle;
+}
+
+.list .list-only {
+	display: auto;
+}
+
+.list .grid-only {
+	display: none !important;
+}
+
+li{
+	position: absolute;
+	    z-index: 0;
+		}
+
+.grid .grid-only {
+	display: auto;
+}
+
+.grid .list-only {
+	display: none !important;
+}
+
+.grid .white-square {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	height: 200px;
+	width: 250px;
+	margin: 10px;
+}
+
+@media screen and (max-width: 600px) {
+	.grid .white-square {
+		display: block;
+		width: auto;
+		height: 150px;
+		margin: 10px auto;
+	}
+}
+
+.grid .box-name {
+	display: block;
+	max-width: 80%;
+	font-size: 16px;
+	line-height: 20px;
+	position: relative;
+	margin: auto;
+	right: 0;
+	left: 0;
+}
+
+a
+{
+	 margin-top: 2em;
+	 color: #8a8a96;
+   text-decoration: underline;
+   background-color: none;
+	 max-width: auto;
+	 overflow: hidden;
+	 text-transform: uppercase;;
+}
+
+.list a{
+	text-decoration: none;
+}
+
+.lower-left-corner {
+	vertical-align: middle;
+	margin: 0 15px;
+	color: #8DC63F;
+	text-decoration: none;
+}
+
+
+.grid .box-detail {
+	font-size: 11px;
+	line-height: 16px;
+	text-transform: uppercase;
+	color: #A1A1A4;
+	overflow: auto;
+}
+
+
+.grid .below-line-container {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	padding: 20px;
+	border-top: 1px solid #eee;
+	font-size: 13px;
+}
+
+.grid .below-line {
+	position: absolute;
+	right: 10px;
+	top: 0;
+	line-height: 40px;
+}
+
+@media screen and (max-width: 200px) {
+	.grid .below-line {
+		right: auto;
+		left: 10px;
+	}
+}

@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee|Bungee+Inline|Muli');
+@import url('https://fonts.googleapis.com/css?family=Nunito:700');
+
+* {
+  color: white;
+  box-sizing: border-box;
+}
+
+body {
+
+  background: #43C6AC; /* fallback for old browsers */
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #76b852 , #8DC26F); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #76b852 , #8DC26F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-backface-visiblity: visible !important;
+  -webkit--box-sizing-visiblity: visible !important;
+}
+
+* { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
+
+.title {
+  width: 500px;
+  margin:auto;
+  font-family: 'Damion', cursive;
+  font-size:80px;
+  /*text-color: '#19e7ef';*/
+  top:70px;
+  position: relative;
+  text-shadow: 3px 3px 0px #2c3e50;
+}
+
+.popout_menu {
+  position: fixed;
+  height: 100%;
+  width: 65px;
+  background: #eacda3; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #eacda3 , #d6ae7b); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #eacda3 , #d6ae7b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  /*This image is labeled for reuse with modification, no attribution required:
+  https://pixabay.com/en/wood-pattern-grain-natural-line-24490/*/
+  background-image: url("../img/treebark.png");
+  transition:width 1s;
+  overflow: hidden;
+  font-family: 'Nunito', sans-serif;
+  z-index: 99;
+}
+
+.popout_menu:hover {
+  width: 220px;
+}
+
+.popout_menu_item span {
+  position: absolute;
+  left:80px;
+  top:20px;
+  transition:color 1s;
+  color: #CFA76E
+}
+
+.popout_menu:hover .popout_menu_item  span {
+ color: #3F1D0B;
+}
+
+.popout_menu_item {
+  position: relative;
+  padding: 20px;
+  transition:border .5s, background .2s;
+}
+
+.popout_menu_item:hover {
+  /*background: #34495e;*/
+  background: #F7F2CC;
+  cursor: pointer;
+}
+
+.uno {
+  border-left:5px solid #055719;
+  /*color: #3F1D0B;*/
+  color: #055719;
+}
+
+.uno:hover{
+  border-left:20px solid #055719;
+}
+
+.dos {
+ border-left:5px solid #7B3327;
+ color: #7B3327;
+}
+
+.dos:hover {
+ border-left:20px solid #7B3327;
+}
+
+.tres {
+  border-left:5px solid #58788D;
+  color: #58788D;
+}
+
+.tres:hover {
+  border-left:20px solid #58788D;
+}
+
+.cuatro {
+  border-left:5px solid #37473D;
+  color: #37473D;
+}
+
+.cuatro:hover {
+  border-left:20px solid #37473D;
+
+}
+
+.cinco {
+  border-left:5px solid #584632;
+  color: #584632;
+}
+
+.cinco:hover {
+ border-left:20px solid #584632;
+}
+
+.a:link, .a:visited{
+  text-decoration: none !important;
+}
+
+/*To get rid of underline in chrome*/
+a:-webkit-any-link {
+  text-decoration: none !important;
+ }

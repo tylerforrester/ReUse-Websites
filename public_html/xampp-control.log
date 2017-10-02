@@ -1,0 +1,28 @@
+7:37:09 PM  [main] 	Initializing Control Panel
+7:37:09 PM  [main] 	Windows Version:  Home  64-bit
+7:37:09 PM  [main] 	XAMPP Version: 5.6.28
+7:37:09 PM  [main] 	Control Panel Version: 3.2.2  [ Compiled: Nov 12th 2015 ]
+7:37:09 PM  [main] 	You are not running with administrator rights! This will work for
+7:37:09 PM  [main] 	most application stuff but whenever you do something with services
+7:37:09 PM  [main] 	there will be a security dialogue or things will break! So think 
+7:37:09 PM  [main] 	about running this application with administrator rights!
+7:37:09 PM  [main] 	XAMPP Installation Directory: "c:\users\jeffrey\documents\osu\cs467_capstone\reuse-website\public_html\"
+7:37:09 PM  [main] 	Checking for prerequisites
+7:37:09 PM  [main] 	All prerequisites found
+7:37:09 PM  [main] 	Initializing Modules
+7:37:09 PM  [main] 	Starting Check-Timer
+7:37:09 PM  [main] 	Control Panel Ready
+7:41:03 PM  [Apache] 	Attempting to start Apache app...
+7:41:04 PM  [Apache] 	Status change detected: running
+7:41:04 PM  [Apache] 	Status change detected: stopped
+7:41:04 PM  [Apache] 	Error: Apache shutdown unexpectedly.
+7:41:04 PM  [Apache] 	This may be due to a blocked port, missing dependencies, 
+7:41:04 PM  [Apache] 	improper privileges, a crash, or a shutdown by another method.
+7:41:04 PM  [Apache] 	Press the Logs button to view error logs and check
+7:41:04 PM  [Apache] 	the Windows Event Viewer for more clues
+7:41:04 PM  [Apache] 	If you need more help, copy and post this
+7:41:04 PM  [Apache] 	entire log window on the forums
+7:41:31 PM  [main] 	Executing "c:\users\jeffrey\documents\osu\cs467_capstone\reuse-website\public_html\apache\logs"
+7:51:57 PM  [main] 	Deinitializing Modules
+7:51:57 PM  [main] 	Deinitializing Control Panel
+
