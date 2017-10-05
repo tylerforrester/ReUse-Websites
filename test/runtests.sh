@@ -3,7 +3,12 @@
 # 1) Validate passed in arguments
 
 if [ "$#" -ne 1 ]; then
-    export API_ADDR="localhost:8080"
+    # export localhost address dependent on environment
+    if [ -z ${C9_USER} ]; then
+        export API_ADDR="localhost:8080"
+    else
+        export API_ADDR="localhost:56565"
+    fi
 else
     export API_ADDR=$1
 fi
@@ -21,7 +26,11 @@ else
 fi
 
 echo -n "Checking if MySQL server is running...   "
-mysqladmin --login-path=local status >/dev/null 2>&1
+if [ -z ${C9_USER} ]; then
+    mysqladmin --login-path=local status >/dev/null 2>&1
+else
+    sudo mysqladmin status >/dev/null 2>&1
+fi
 
 if [ "$?" -ne 0 ]; then
     echo "MySQL server not running!"

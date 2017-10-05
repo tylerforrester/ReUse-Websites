@@ -53,7 +53,7 @@
     });
 
 	/**
-  	 * @api {get} /reuseDB
+  	 * @api {get} /donorXML
      * @apiName ReUseApp
      *
 	 * @apiSuccess {XML} An XML tree of the donors/sponsors, with their name, description, and website, ordered by name.

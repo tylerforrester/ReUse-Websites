@@ -11,3 +11,10 @@ Websites $ cd public_html
 public_html $ php -S localhost:8001
 ```
 Where 8001 can be any unused port number.
+
+### Documentation
+
+Here are links to the various tools / frameworks used for this project.
+* [Slim Framework v2](http://docs.slimframework.com/)
+* [Guzzle HTTP Client](http://docs.guzzlephp.org/en/stable/)
+* [PHPUnit v5.7](https://phpunit.de/)
