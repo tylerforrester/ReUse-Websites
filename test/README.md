@@ -1,6 +1,8 @@
 # TESTING
 
-## Dependencies
+**_NOTE: If you're doing development in a Cloud9 workspace, you can ignore the "Install Test Dependencies" section and skip ahead to "Test your setup"._**
+
+## Install Test Dependencies
 
 The testing setup has a few requirements that need to be installed in order to run.  First and foremost, you'll need a version of PHP on your `PATH`. These instructions have been found to work with PHP 5.6, 7.0, and 7.1.  All PHP based dependencies are managed with Composer so lets start there first.
 
@@ -65,7 +67,7 @@ $ mysql_config_editor set --login-path=local --host=localhost --user=username --
 
 ## Test your setup
 
-* Now that all the dependencies are installed and your brand new MySql server is running, you should be able to run the example test.
+* Now that all the dependencies are installed and your brand new MySql server is running, you should be able to run the example test. Make sure you're in the `/test` directory and do the following:
 
 ```bash
 test $ ./runtests.sh
@@ -97,6 +99,12 @@ Shutting down the PHP dev server...      OK
 
 ```bash
 test $ ./runtests.sh localhost:56565
+```
+
+* If the script complains that MySQL isn't running:
+
+```bash
+$ mysql-ctl start
 ```
 
 ## Writing new tests
