@@ -30,7 +30,14 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE loc.recycle <> 1 AND loc_item.Type = 1");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								    FROM Reuse_Locations AS loc 
+								    LEFT JOIN States AS state ON state.id = loc.state_id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+									INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+									INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+									WHERE loc.recycle <> 1 AND loc_item.Type = 1");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -48,13 +55,20 @@
   	 * @api {get} /business/reuseExclusive
      * @apiName ReUseApp
      *
-	 * @apiSuccess {JSON[]} returnArray Distinct businesses not in Repair, Repair Items, or Recycle and not having the recycle flag set to 1 and having the location type set to 0 for reuse.
+	 * @apiSuccess {JSON[]} returnArray Distinct businesses not in Repair, Repair Items, 
+	 * or Recycle and not having the recycle flag set to 1 and having the location type set to 0 for reuse.
 	 */
 	$app->get('/business/reuseExclusive', function(){
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE cat.name NOT IN ('Repair', 'Repair Items', 'Recycle') AND loc.recycle <> 1 AND loc_item.Type = 0");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+									FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								    INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+								    WHERE cat.name NOT IN ('Repair', 'Repair Items', 'Recycle') AND loc.recycle <> 1 AND loc_item.Type = 0");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -77,7 +91,11 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id WHERE loc.recycle = 1");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								    FROM Reuse_Locations AS loc 
+								    LEFT JOIN States AS state ON state.id = loc.state_id 
+								    WHERE loc.recycle = 1");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -105,7 +123,15 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE cat.name = '$cat_name' ORDER BY loc.name");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+											      loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								    FROM Reuse_Locations AS loc 
+								    LEFT JOIN States AS state ON state.id = loc.state_id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								    INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id
+								    WHERE cat.name = '$cat_name' 
+								    ORDER BY loc.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -131,7 +157,13 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE cat.name <> '$cat_name' ORDER BY loc.name");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								    FROM Reuse_Locations AS loc 
+								    LEFT JOIN States AS state ON state.id = loc.state_id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								    INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE cat.name <> '$cat_name' ORDER BY loc.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -158,7 +190,15 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE cat.name = '$cat_name' AND loc_item.Type = 0 ORDER BY loc.name");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								   FROM Reuse_Locations AS loc 
+								   LEFT JOIN States AS state ON state.id = loc.state_id 
+								   INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								   INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+								   INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+								   WHERE cat.name = '$cat_name' AND loc_item.Type = 0 
+								   ORDER BY loc.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -184,7 +224,15 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE cat.name = '$cat_name' AND loc_item.Type = 1 ORDER BY loc.name");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+											      loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								    FROM Reuse_Locations AS loc 
+								    LEFT JOIN States AS state ON state.id = loc.state_id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								    INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+								    WHERE cat.name = '$cat_name' AND loc_item.Type = 1 
+								    ORDER BY loc.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -211,7 +259,14 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE cat.name <> '$cat_name'  AND loc_item.Type = 1 ORDER BY loc.name");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+									FROM Reuse_Locations AS loc 
+									LEFT JOIN States AS state ON state.id = loc.state_id 
+									INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+									INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+									INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+									WHERE cat.name <> '$cat_name'  AND loc_item.Type = 1 ORDER BY loc.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -236,7 +291,12 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id");//NOTE THAT LAST INNER JOIN IS UNNECESSARY - REMOVE LATER
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, 
+											  	  loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								   FROM Reuse_Locations AS loc 
+								   LEFT JOIN States AS state ON state.id = loc.state_id 
+								   INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								   INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id");//NOTE THAT LAST INNER JOIN IS UNNECESSARY - REMOVE LATER
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -263,7 +323,12 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id WHERE item.name = '$item_name'");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								   FROM Reuse_Locations AS loc 
+								   LEFT JOIN States AS state ON state.id = loc.state_id 
+								   INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								   INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id WHERE item.name = '$item_name'");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -289,7 +354,13 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id WHERE item.name = '$item_name' AND loc_item.Type = 0");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, 
+												  loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								    FROM Reuse_Locations AS loc 
+								    LEFT JOIN States AS state ON state.id = loc.state_id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								    INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+								    WHERE item.name = '$item_name' AND loc_item.Type = 0");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -315,9 +386,16 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id WHERE item.name = '$item_name' AND loc_item.Type = 1");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+										loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								    FROM Reuse_Locations AS loc 
+								    LEFT JOIN States AS state ON state.id = loc.state_id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								    INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+								    WHERE item.name = '$item_name' AND loc_item.Type = 1");
 
 		$returnArray = array();
+	    
 	    while($row = $result->fetch_object()){
 	      $returnArray[] = $row;
 	    }
@@ -347,7 +425,14 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE cat.name = '$cat_name' AND item.name = '$item_name'");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, 
+												  loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								   FROM Reuse_Locations AS loc 
+								   LEFT JOIN States AS state ON state.id = loc.state_id 
+								   INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								   INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+								   INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+								   WHERE cat.name = '$cat_name' AND item.name = '$item_name'");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -362,7 +447,7 @@
 
 
         /**
-  	 * @api {get} /reuse/business/item/name/:item_name
+  	 * @api {get} /reuse/business/item/name/:item_name 
      * @apiName ReUseApp
      *
 	 * @apiParam {String} item_name Item name (mandatory).
@@ -379,7 +464,14 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE cat.name = '$cat_name' AND item.name = '$item_name' AND loc_item.Type = 0");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								    FROM Reuse_Locations AS loc 
+									LEFT JOIN States AS state ON state.id = loc.state_id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								    INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id
+								    WHERE cat.name = '$cat_name' AND item.name = '$item_name' AND loc_item.Type = 0");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -410,7 +502,14 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id WHERE cat.name = '$cat_name' AND item.name = '$item_name' AND loc_item.Type = 1");
+		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								    FROM Reuse_Locations AS loc 
+								    LEFT JOIN States AS state ON state.id = loc.state_id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON loc.id = loc_item.location_id 
+								    INNER JOIN Reuse_Items AS item ON loc_item.item_id = item.id 
+								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+								    WHERE cat.name = '$cat_name' AND item.name = '$item_name' AND loc_item.Type = 1");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -431,6 +530,7 @@
      *
 	 * @apiParam {String} bus_name Business name (mandatory).
 	 * @apiSuccess {JSON Object} business The first business with a given name.
+	 * SQL Injection issue
 	 */
 	$app->get('/business/name/:bus_name', function($bus_name){
 		$mysqli = connectReuseDB();
@@ -438,8 +538,12 @@
 		singleToDoubleQuotes($bus_name);
 		underscoreToSlash($bus_name);
 
-		$result = $mysqli->query("SELECT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude FROM Reuse_Locations AS loc LEFT JOIN States AS state ON state.id = loc.state_id WHERE loc.name = '$bus_name' LIMIT 1");
-
+		$result = $mysqli->query("SELECT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, 
+										 loc.city, loc.zip_code, loc.latitude, loc.longitude 
+								   FROM Reuse_Locations AS loc 
+								   LEFT JOIN States AS state ON state.id = loc.state_id 
+								   WHERE loc.name = '$bus_name' LIMIT 1");
+		
 		$business = $result->fetch_object();
 
 	    echo json_encode($business);
@@ -461,8 +565,11 @@
 		singleToDoubleQuotes($bus_name);
 		underscoreToSlash($bus_name);
 
-		$result = $mysqli->query("SELECT DISTINCT item.name FROM Reuse_Items AS item INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id INNER JOIN
-		Reuse_Locations AS loc ON loc.id = loc_item.location_id WHERE loc.name = '$bus_name' ORDER BY item.name");
+		$result = $mysqli->query("SELECT DISTINCT item.name FROM Reuse_Items AS item 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
+								    INNER JOIN Reuse_Locations AS loc ON loc.id = loc_item.location_id 
+								    WHERE loc.name = '$bus_name'
+								    ORDER BY item.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -492,7 +599,13 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count FROM Reuse_Items AS item INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id WHERE cat.name = '$cat_name' GROUP BY (item.name) ORDER BY item.name");
+		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
+								    FROM Reuse_Items AS item 
+								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
+								    WHERE cat.name = '$cat_name' 
+								    GROUP BY (item.name) 
+								    ORDER BY item.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -510,7 +623,8 @@
      * @apiName ReUseApp
      *
 	 * @apiParam {String} cat_name Category name (mandatory).
-	 * @apiSuccess {JSON[]} returnArray Distinct reuse items in the given category as well as the number of businesses accepting an item, ordered by item name.
+	 * @apiSuccess {JSON[]} returnArray Distinct reuse items in the given category 
+	 *                      as well as the number of businesses accepting an item, ordered by item name.
 	 */
 	$app->get('/reuse/item/category/name/:cat_name', function($cat_name){
 
@@ -521,7 +635,12 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count FROM Reuse_Items AS item INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id WHERE cat.name = '$cat_name' AND loc_item.Type = 0 GROUP BY (item.name) ORDER BY item.name");
+		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
+								    FROM Reuse_Items AS item INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+									INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
+									WHERE cat.name = '$cat_name' AND loc_item.Type = 0 
+									GROUP BY (item.name) 
+									ORDER BY item.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -534,12 +653,13 @@
 	    $mysqli->close();
 	});
 
-	/**
+	/** Returns goods by category
   	 * @api {get} /repair/item/category/name/:cat_name
      * @apiName ReUseApp
      *
 	 * @apiParam {String} cat_name Category name (mandatory).
-	 * @apiSuccess {JSON[]} returnArray Distinct repair items in the given category as well as the number of businesses accepting an item, ordered by item name.
+	 * @apiSuccess {JSON[]} returnArray Distinct repair items in the given category as well as the number of 
+	 *  businesses accepting an item, ordered by item name.
 	 */
 	$app->get('/repair/item/category/name/:cat_name', function($cat_name){
 
@@ -550,7 +670,12 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count FROM Reuse_Items AS item INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id WHERE cat.name = '$cat_name' AND loc_item.Type = 1 GROUP BY (item.name) ORDER BY item.name");
+		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
+								    FROM Reuse_Items AS item 
+								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
+								    WHERE cat.name = '$cat_name' AND loc_item.Type = 1 
+								    GROUP BY (item.name) ORDER BY item.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -563,8 +688,9 @@
 	    $mysqli->close();
 	});
 
-        /**
-  	 * @api {get} /item/category/reuseExclusive
+     /** count seems okay?
+      * Maybe show category as well as item
+  	 * @api {get} /item/category/repairExclusive
      * @apiName ReUseApp
      *
 	 * @apiSuccess {JSON[]} returnArray Distinct items in any category with repair businesses
@@ -572,7 +698,13 @@
 	$app->get('/item/category/repairExclusive', function(){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count FROM Reuse_Items AS item INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id WHERE loc_item.Type = 1 GROUP BY (item.name) ORDER BY item.name");
+		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
+								    FROM Reuse_Items AS item 
+								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
+								    WHERE loc_item.Type = 1 
+								    GROUP BY (item.name) 
+								    ORDER BY item.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -586,16 +718,23 @@
 	});
         
         
-	/**
+	/** NUMBER OF BUSINESS NOT COUNTING CORRECTLY
   	 * @api {get} /item/category/reuseExclusive
      * @apiName ReUseApp
      *
-	 * @apiSuccess {JSON[]} returnArray Distinct items in any category excluding the special categories of Repair, Repair Items, or Recycling and a count of the number of businesses for each item, ordered by ordered by item name.
+	 * @apiSuccess {JSON[]} returnArray Distinct items in any category excluding the special categories of Repair, 
+	 * Repair Items, or Recycling and a count of the number of businesses for each item, ordered by ordered by item name.
 	 */
 	$app->get('/item/category/reuseExclusive', function(){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count FROM Reuse_Items AS item INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id WHERE cat.name NOT IN ('Repair', 'Repair Items', 'Recycle') AND loc_item.Type = 0 GROUP BY (item.name) ORDER BY item.name");
+		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
+								    FROM Reuse_Items AS item 
+								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
+								    WHERE cat.name NOT IN ('Repair', 'Repair Items', 'Recycle') AND loc_item.Type = 0 
+								    GROUP BY (item.name) 
+								    ORDER BY item.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -610,6 +749,8 @@
 
 
 	/**
+	 * 
+	 * 
   	 * @api {get} /category/reuseExclusive
      * @apiName ReUseApp
      *
@@ -638,7 +779,7 @@
 	    $mysqli->close();
 	});
 
-	/**
+	/** Current categories under repair -- not sure why this is necessary
   	 * @api {get} /category/repairExclusive
      * @apiName ReUseApp
      *
@@ -648,11 +789,11 @@
 		$mysqli = connectReuseDB();
 
 		$result = $mysqli->query('SELECT DISTINCT c.name
-                                            FROM Reuse_Locations_Items l
-                                            JOIN Reuse_Items i ON l.item_id = i.id
-                                            JOIN Reuse_Categories c ON i.category_id = c.id
-                                            WHERE l.Type = 1
-                                            ORDER BY c.name ASC');
+                                    FROM Reuse_Locations_Items l
+                                    JOIN Reuse_Items i ON l.item_id = i.id
+                                    JOIN Reuse_Categories c ON i.category_id = c.id
+                                    WHERE l.Type = 1
+                                    ORDER BY c.name ASC');
                 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -665,7 +806,8 @@
 	    $mysqli->close();
 	});
         
-	/**
+	/**  Doesn't appear to be working 
+  	 * 
   	 * @api {get} /document/business/name/:bus_name
      * @apiName ReUseApp
      *
@@ -678,7 +820,10 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT doc.name, doc.URI FROM Reuse_Documents AS doc INNER JOIN Reuse_Locations AS loc ON doc.location_id = loc.id WHERE loc.name = '$bus_name' ORDER BY doc.name");
+		$result = $mysqli->query("SELECT DISTINCT doc.name, doc.URI FROM Reuse_Documents AS doc 
+								   INNER JOIN Reuse_Locations AS loc ON doc.location_id = loc.id 
+								   WHERE loc.name = '$bus_name' 
+								   ORDER BY doc.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -693,6 +838,7 @@
 
 
 	/**
+	 *  CURRENTLY UNUSED 
   	 * @api {get} /donor
      * @apiName ReUseApp
      *
@@ -702,7 +848,9 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT donor.name, donor.description, donor.websiteurl FROM Reuse_Donors AS donor ORDER BY donor.name");
+		$result = $mysqli->query("SELECT DISTINCT donor.name, donor.description, donor.websiteurl 
+								   FROM Reuse_Donors AS donor 
+								   ORDER BY donor.name");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -715,7 +863,7 @@
 	    $mysqli->close();
 	});
 
-	/**
+	/** Business Search returns if any part of the Business matches e.g. "lack" matches "Sedlack"
 	* Request for business with LIKE name
 	* Updated 2/16/2017 - Jeffrey Schachtsick
 	*
@@ -723,7 +871,9 @@
 	$app->get('/businessSearch/:term', function($term){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT name, id, address_line_1, address_line_2, state_id, phone, website, city, zip_code FROM Reuse_Locations WHERE Reuse_Locations.name LIKE '%$term%'");
+		$result = $mysqli->query("SELECT name, id, address_line_1, address_line_2, state_id, phone, website, city, zip_code 
+								    FROM Reuse_Locations 
+								    WHERE Reuse_Locations.name LIKE '%$term%'");
 
 		$returnArray = array();
 		while($row = $result->fetch_object()){
@@ -745,7 +895,10 @@
 	$app->get('/categorySearch/:term', function($term){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT cat.name, cat.id, loc_item.Type FROM Reuse_Items AS item INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id WHERE cat.name LIKE '%$term%'");
+		$result = $mysqli->query("SELECT DISTINCT cat.name, cat.id, loc_item.Type FROM Reuse_Items AS item 
+								   INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
+								   INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
+								   WHERE cat.name LIKE '%$term%'");
 
 		$returnArray = array();
 		while($row = $result->fetch_object()){
@@ -767,7 +920,10 @@
 	$app->get('/itemSearch/:term', function($term){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT i.name, i.id, i.category_id, loc_item.Type FROM Reuse_Items i INNER JOIN Reuse_Locations_Items AS loc_item ON i.id = loc_item.item_id WHERE i.name LIKE '%$term%'");
+		$result = $mysqli->query("SELECT DISTINCT i.name, i.id, i.category_id, loc_item.Type 
+								    FROM Reuse_Items i 
+								    INNER JOIN Reuse_Locations_Items AS loc_item ON i.id = loc_item.item_id 
+								    WHERE i.name LIKE '%$term%'");
 
 		$returnArray = array();
 		while($row = $result->fetch_object()){
@@ -794,7 +950,9 @@
 	$mysqli = connectReuseDB();
 
 	$id = (int)$mysqli->real_escape_string($id);
-	$result = $mysqli->query('SELECT name, id FROM Reuse_Categories WHERE Reuse_Categories.id = '.$id.'');
+	$result = $mysqli->query('SELECT name, id 
+							    FROM Reuse_Categories 
+							    WHERE Reuse_Categories.id = '.$id.'');
 	$returnArray = array();
 	while($row = $result->fetch_object()){
 		$returnArray[] = $row;

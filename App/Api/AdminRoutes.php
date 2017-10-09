@@ -31,7 +31,9 @@ $app->response->headers->set('Content-Type', 'application/json');
 		$mysqli = connectReuseDB();
 
 		$id = (int)$mysqli->real_escape_string($id);
-		$result = $mysqli->query('SELECT name, id FROM Reuse_Categories WHERE Reuse_Categories.id = '.$id.'');
+		$result = $mysqli->query('SELECT name, id 
+									FROM Reuse_Categories 
+									WHERE Reuse_Categories.id = '.$id.'');
 	    $returnArray = array();
 	    while($row = $result->fetch_object()){
 	      $returnArray[] = $row;
@@ -83,7 +85,8 @@ $app->response->headers->set('Content-Type', 'application/json');
 	$app->get('/business', function() {
 		$mysqli = connectReuseDB();
 
-    $result = $mysqli->query("SELECT name, id, address_line_1, address_line_2, state_id, phone, website, city, zip_code FROM Reuse_Locations");
+    $result = $mysqli->query("SELECT name, id, address_line_1, address_line_2, state_id, phone, website, city, zip_code 
+                               FROM Reuse_Locations");
 
 		$returnArray = array();
 	    while($row = $result->fetch_assoc()){
@@ -174,7 +177,9 @@ $app->response->headers->set('Content-Type', 'application/json');
     $app->get('/business/:one', function($one){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT name, id, address_line_1, address_line_2, state_id, phone, website, city, zip_code FROM Reuse_Locations WHERE Reuse_Locations.id = '$one'");
+		$result = $mysqli->query("SELECT name, id, address_line_1, address_line_2, state_id, phone, website, city, zip_code 
+								   FROM Reuse_Locations 
+								   WHERE Reuse_Locations.id = '$one'");
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -195,7 +200,9 @@ $app->response->headers->set('Content-Type', 'application/json');
 	$app->get('/businessSearch/:term', function($term){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT name, id, address_line_1, address_line_2, state_id, phone, website, city, zip_code FROM Reuse_Locations WHERE Reuse_Locations.name LIKE '%$term%'");
+		$result = $mysqli->query("SELECT name, id, address_line_1, address_line_2, state_id, phone, website, city, zip_code 
+								   FROM Reuse_Locations 
+								   WHERE Reuse_Locations.name LIKE '%$term%'");
 
 		$returnArray = array();
 		while($row = $result->fetch_object()){
@@ -217,7 +224,9 @@ $app->response->headers->set('Content-Type', 'application/json');
 	$app->get('/categorySearch/:term', function($term){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT name, id FROM Reuse_Categories WHERE Reuse_Categories.name LIKE '%$term%'");
+		$result = $mysqli->query("SELECT name, id 
+								   FROM Reuse_Categories 
+								   WHERE Reuse_Categories.name LIKE '%$term%'");
 
 		$returnArray = array();
 		while($row = $result->fetch_object()){
@@ -239,7 +248,9 @@ $app->response->headers->set('Content-Type', 'application/json');
 	$app->get('/itemSearch/:term', function($term){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT name, id, category_id FROM Reuse_Items WHERE Reuse_Items.name LIKE '%$term%'");
+		$result = $mysqli->query("SELECT name, id, category_id 
+								   FROM Reuse_Items 
+								   WHERE Reuse_Items.name LIKE '%$term%'");
 
 		$returnArray = array();
 		while($row = $result->fetch_object()){
@@ -265,7 +276,8 @@ $app->response->headers->set('Content-Type', 'application/json');
 	$app->get('/items', function() {
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query('SELECT name, id, category_id FROM Reuse_Items');
+		$result = $mysqli->query('SELECT name, id, category_id 
+									FROM Reuse_Items');
 
 		$returnArray = array();
 	    while($row = $result->fetch_object()){
@@ -291,7 +303,8 @@ $app->response->headers->set('Content-Type', 'application/json');
 	$app->get('/items/:cat', function($cat){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT name, id, category_id FROM Reuse_Items WHERE Reuse_Items.category_id = '".$cat."'");
+		$result = $mysqli->query("SELECT name, id, category_id 
+									FROM Reuse_Items WHERE Reuse_Items.category_id = '".$cat."'");
 
 		$returnArray = array();
 		while($row = $result->fetch_object()){
@@ -315,7 +328,8 @@ $app->response->headers->set('Content-Type', 'application/json');
 	$app->get('/businessdocs/:id', function($id) {
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT id, name, URI FROM Reuse_Documents WHERE location_id = '$id'");
+		$result = $mysqli->query("SELECT id, name, URI 
+								  FROM Reuse_Documents WHERE location_id = '$id'");
 
 		$returnArray = array();
 
@@ -389,7 +403,8 @@ $app->response->headers->set('Content-Type', 'application/json');
 		$mysqli = connectReuseDB();
 
 		$delID = $mysqli->real_escape_string($id);
-		$mysqli->query("DELETE FROM Reuse_Categories WHERE Reuse_Categories.id ='$delID'");
+		$mysqli->query("DELETE FROM Reuse_Categories 
+						 WHERE Reuse_Categories.id ='$delID'");
 		$mysqli->close();
 
 		/* Update Mobile Database */
@@ -432,7 +447,9 @@ $app->response->headers->set('Content-Type', 'application/json');
 		$mysqli = connectReuseDB();
 		$delID = $mysqli->real_escape_string($id);
 
-        $result = $mysqli->query("SELECT location_id FROM Reuse_Documents WHERE id = '$delID'");
+        $result = $mysqli->query("SELECT location_id 
+                                   FROM Reuse_Documents 
+                                   WHERE id = '$delID'");
 
         while($row = $result->fetch_object()){
 	      $returnArray[] = $row;
