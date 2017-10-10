@@ -1,7 +1,6 @@
 <?php
-
-// require the composer autoload file
-require dirname(__FILE__).'/../vendor/autoload.php';
+// autoload stuff
+require_once dirname(__FILE__).'/../../vendor/autoload.php';
 
 // make using our class names nicer
 use PHPUnit\Framework\TestCase;

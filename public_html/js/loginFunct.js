@@ -33,7 +33,7 @@ function login(){
 
   /* if no blanks, make the request and check for password match */
   else{
-    req = new XMLHttpRequest();
+    var req = new XMLHttpRequest();
     req.onreadystatechange = function(){
       if(req.readyState == 4 && req.status == 200){
 

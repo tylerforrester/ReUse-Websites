@@ -69,7 +69,7 @@ echo
 echo "BEGIN TESTS-------------------------------------------------------------------------"
 echo
 
-./vendor/bin/phpunit tests
+~/workspace/bin/phpunit tests
 
 echo
 echo "END TESTS---------------------------------------------------------------------------"

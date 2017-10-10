@@ -8,9 +8,7 @@
 	*				Requirements
 	**************************************************************************/
 	
-	//Framework
-	require 'Slim/Slim.php';
-	\Slim\Slim::registerAutoloader();
+	require_once '../vendor/autoload.php';
 
 	//functions to facilitate connection to reuse database
 		// - connectReuseDB()		<-- Create mysqli object using reuse db creds
@@ -42,9 +40,30 @@
     $app->response->headers->set('Content-Type', 'application/json');
 
     $app->get('/hello/:name', function ($name) {
-            echo "Hello, $name";
+    	echo "Hello, $name";
     });
-
-	
+    
+    $app->get('/test/:cid', function ($cid) use ($app) {
+		// query for items with category $cid
+		$items = ItemQuery::create()
+			->filterByCategory($cid)
+			->find();
+		
+		// set our headers	
+		$app->response->headers->set('Content-Type', 'text/html');
+		
+		// echo start of the html
+		echo '<html><body><ul>';
+		
+		// iterate over each thing returned form the db
+		foreach ($items as $item)
+		{
+			echo '<li>'.$item->getName().'</li>';
+		}
+		
+		// close out the html
+		echo '</ul></body></html>';
+    });
+    
 	$app->run();	
 ?>
