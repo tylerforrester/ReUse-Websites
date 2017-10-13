@@ -121,9 +121,12 @@
 		singleToDoubleQuotes($cat_name);
 		underscoreToSlash($cat_name);
 
-		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+
+		$mysqli = connectReuseDB();
+	 	$cat_name = $mysqli->real_escape_string($cat_name);
+
+        $result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
 											      loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
 								    FROM Reuse_Locations AS loc 
 								    LEFT JOIN States AS state ON state.id = loc.state_id 
@@ -144,7 +147,7 @@
 	    $mysqli->close();
 	});
 
-	/**
+	/** TODO This is buggy Businesses pop up on both searches
   	 * @api {get} /business/category/name/not/:cat_name
      * @apiName ReUseApp
      *
@@ -156,6 +159,7 @@
 		underscoreToSlash($cat_name);
 
 		$mysqli = connectReuseDB();
+        $cat_name = $mysqli->real_escape_string($cat_name);
 
 		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
 												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
@@ -189,6 +193,7 @@
 		underscoreToSlash($cat_name);
 
 		$mysqli = connectReuseDB();
+        $cat_name = $mysqli->real_escape_string($cat_name);
 
 		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
 												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
@@ -223,7 +228,7 @@
 		underscoreToSlash($cat_name);
 
 		$mysqli = connectReuseDB();
-
+        $cat_name = $mysqli->real_escape_string($cat_name);
 		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
 											      loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
 								    FROM Reuse_Locations AS loc 
@@ -258,7 +263,7 @@
 		underscoreToSlash($cat_name);
 
 		$mysqli = connectReuseDB();
-
+        $cat_name = $mysqli->real_escape_string($cat_name);
 		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
 												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
 									FROM Reuse_Locations AS loc 
@@ -322,8 +327,9 @@
 		underscoreToSlash($item_name);
 
 		$mysqli = connectReuseDB();
+	 	$item_name = $mysqli->real_escape_string($item_name);
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+	 	$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
 												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
 								   FROM Reuse_Locations AS loc 
 								   LEFT JOIN States AS state ON state.id = loc.state_id 
@@ -354,7 +360,9 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, 
+		$item_name = $mysqli->real_escape_string($item_name);
+
+        $result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, 
 												  loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
 								    FROM Reuse_Locations AS loc 
 								    LEFT JOIN States AS state ON state.id = loc.state_id 
@@ -386,7 +394,9 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
+        $item_name = $mysqli->real_escape_string($item_name);
+
+        $result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
 										loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
 								    FROM Reuse_Locations AS loc 
 								    LEFT JOIN States AS state ON state.id = loc.state_id 
@@ -424,6 +434,8 @@
 		//echo $cat_name."	".$item_name;
 
 		$mysqli = connectReuseDB();
+        $item_name = $mysqli->real_escape_string($item_name);
+        $cat_name = $mysqli->real_escape_string($cat_name);
 
 		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, 
 												  loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
@@ -464,6 +476,9 @@
 
 		$mysqli = connectReuseDB();
 
+		$item_name = $mysqli->real_escape_string($item_name);
+        $cat_name = $mysqli->real_escape_string($cat_name);
+
 		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
 												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
 								    FROM Reuse_Locations AS loc 
@@ -501,6 +516,8 @@
 		//echo $cat_name."	".$item_name;
 
 		$mysqli = connectReuseDB();
+        $item_name = $mysqli->real_escape_string($item_name);
+        $cat_name = $mysqli->real_escape_string($cat_name);
 
 		$result = $mysqli->query("SELECT DISTINCT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, 
 												  loc.phone, loc.website, loc.city, loc.zip_code, loc.latitude, loc.longitude 
@@ -537,8 +554,9 @@
 
 		singleToDoubleQuotes($bus_name);
 		underscoreToSlash($bus_name);
+        $bus_name = $mysqli->real_escape_string($bus_name);
 
-		$result = $mysqli->query("SELECT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, 
+        $result = $mysqli->query("SELECT loc.name, loc.id, loc.address_line_1, loc.address_line_2, state.abbreviation, loc.phone, loc.website, 
 										 loc.city, loc.zip_code, loc.latitude, loc.longitude 
 								   FROM Reuse_Locations AS loc 
 								   LEFT JOIN States AS state ON state.id = loc.state_id 
@@ -564,8 +582,9 @@
 
 		singleToDoubleQuotes($bus_name);
 		underscoreToSlash($bus_name);
+        $bus_name = $mysqli->real_escape_string($bus_name);
 
-		$result = $mysqli->query("SELECT DISTINCT item.name FROM Reuse_Items AS item 
+        $result = $mysqli->query("SELECT DISTINCT item.name FROM Reuse_Items AS item 
 								    INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
 								    INNER JOIN Reuse_Locations AS loc ON loc.id = loc_item.location_id 
 								    WHERE loc.name = '$bus_name'
@@ -599,7 +618,9 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
+        $cat_name = $mysqli->real_escape_string($cat_name);
+
+        $result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
 								    FROM Reuse_Items AS item 
 								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
 								    INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
@@ -635,7 +656,9 @@
 
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
+         $cat_name = $mysqli->real_escape_string($cat_name);
+
+         $result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
 								    FROM Reuse_Items AS item INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
 									INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
 									WHERE cat.name = '$cat_name' AND loc_item.Type = 0 
@@ -669,8 +692,10 @@
 
 
 		$mysqli = connectReuseDB();
+        $cat_name = $mysqli->real_escape_string($cat_name);
 
-		$result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
+
+        $result = $mysqli->query("SELECT DISTINCT item.name, COUNT(loc_item.location_id) AS item_count 
 								    FROM Reuse_Items AS item 
 								    INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
 								    INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
@@ -820,6 +845,8 @@
 
 		$mysqli = connectReuseDB();
 
+		$bus_name = $mysqli->real_escape_string($bus_name);
+
 		$result = $mysqli->query("SELECT DISTINCT doc.name, doc.URI FROM Reuse_Documents AS doc 
 								   INNER JOIN Reuse_Locations AS loc ON doc.location_id = loc.id 
 								   WHERE loc.name = '$bus_name' 
@@ -871,7 +898,9 @@
 	$app->get('/businessSearch/:term', function($term){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT name, id, address_line_1, address_line_2, state_id, phone, website, city, zip_code 
+		$term = $mysqli->real_escape_string($term);
+
+        $result = $mysqli->query("SELECT name, id, address_line_1, address_line_2, state_id, phone, website, city, zip_code 
 								    FROM Reuse_Locations 
 								    WHERE Reuse_Locations.name LIKE '%$term%'");
 
@@ -895,7 +924,9 @@
 	$app->get('/categorySearch/:term', function($term){
 		$mysqli = connectReuseDB();
 
-		$result = $mysqli->query("SELECT DISTINCT cat.name, cat.id, loc_item.Type FROM Reuse_Items AS item 
+        $term = $mysqli->real_escape_string($term);
+
+        $result = $mysqli->query("SELECT DISTINCT cat.name, cat.id, loc_item.Type FROM Reuse_Items AS item 
 								   INNER JOIN Reuse_Categories AS cat ON item.category_id = cat.id 
 								   INNER JOIN Reuse_Locations_Items AS loc_item ON item.id = loc_item.item_id 
 								   WHERE cat.name LIKE '%$term%'");
@@ -919,6 +950,8 @@
 	*/
 	$app->get('/itemSearch/:term', function($term){
 		$mysqli = connectReuseDB();
+
+        $term = $mysqli->real_escape_string($term);
 
 		$result = $mysqli->query("SELECT DISTINCT i.name, i.id, i.category_id, loc_item.Type 
 								    FROM Reuse_Items i 
@@ -950,9 +983,9 @@
 	$mysqli = connectReuseDB();
 
 	$id = (int)$mysqli->real_escape_string($id);
-	$result = $mysqli->query('SELECT name, id 
+	$result = $mysqli->query("SELECT name, id 
 							    FROM Reuse_Categories 
-							    WHERE Reuse_Categories.id = '.$id.'');
+							    WHERE Reuse_Categories.id = '.$id.'");
 	$returnArray = array();
 	while($row = $result->fetch_object()){
 		$returnArray[] = $row;
